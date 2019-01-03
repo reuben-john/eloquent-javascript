@@ -20,3 +20,22 @@ When you have a program that generates this pattern, define a binding
 size = 8 and change the program so that it works for any size, outputting
 a grid of the given width and height.
 */
+
+let size = 33;
+for (let i = 0; i <= size; i++) {
+  let row = "";
+
+  if (i % 2 == 0) {
+    row += " ";
+  }
+
+  for (let j = 0; j <= size; j++) {
+    if (j % 2 == 0) {
+      row += "#";
+    } else {
+      row += " ";
+    }
+  }
+
+  console.log(row);
+}
