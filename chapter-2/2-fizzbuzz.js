@@ -15,13 +15,13 @@ labor market value just went up.)
 */
 
 for (let i = 0; i <= 100; i++) {
+  let answer = "";
+
   if (i % 3 == 0) {
-    console.log("Fizz");
+    answer += "Fizz";
   }
   if (i % 5 == 0) {
-    console.log("Buzz");
+    answer += "Buzz";
   }
-  if (i % 3 == 0 && i % 5 == 0) {
-    console.log("FizzBuzz");
-  }
+  console.log(answer || i);
 }
