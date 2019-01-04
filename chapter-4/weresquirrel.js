@@ -1,3 +1,5 @@
+require("./journal.js");
+
 let journal = [];
 
 function addEntry(events, squirrel) {
