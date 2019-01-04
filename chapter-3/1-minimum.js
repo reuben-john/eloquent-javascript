@@ -10,3 +10,12 @@ console.log(min(0, 10));
 console.log(min(0, -10));
  → -10
 */
+
+const myMin = (x, y) => {
+  if (x < y) {
+    return x;
+  }
+  return y;
+};
+
+console.log(myMin(11, 2));
