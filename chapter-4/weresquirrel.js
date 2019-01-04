@@ -61,5 +61,8 @@ function journalEvents(journal) {
 // console.log(journalEvents(JOURNAL));
 
 for (let event of journalEvents(JOURNAL)) {
-  console.log(event + ":", phi(tableFor(event, JOURNAL)));
+  let correlation = phi(tableFor(event, JOURNAL));
+  if (correlation > 0.1 || correlation < -0.1) {
+    console.log(event + ":", correlation);
+  }
 }
