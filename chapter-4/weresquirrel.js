@@ -44,5 +44,22 @@ function tableFor(event, journal) {
   return table;
 }
 
-console.log(phi([76, 9, 4, 1]));
-console.log(tableFor("pizza", JOURNAL));
+function journalEvents(journal) {
+  let events = [];
+  for (let entry of journal) {
+    for (let event of entry.events) {
+      if (!events.includes(event)) {
+        events.push(event);
+      }
+    }
+  }
+  return events;
+}
+
+// console.log(phi([76, 9, 4, 1]));
+// console.log(tableFor("peanuts", JOURNAL));
+// console.log(journalEvents(JOURNAL));
+
+for (let event of journalEvents(JOURNAL)) {
+  console.log(event + ":", phi(tableFor(event, JOURNAL)));
+}
