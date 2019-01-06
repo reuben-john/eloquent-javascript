@@ -50,3 +50,8 @@ console.log(max(...numbers));
 
 // can spread an array into a new array
 console.log([1, 2, 3, ...numbers, 55, 23]);
+
+// destructuring can be used to look inside an object or array
+let { name } = { name: "Faraji", age: 23 };
+
+console.log({ name });
