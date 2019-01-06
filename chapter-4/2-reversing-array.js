@@ -20,3 +20,21 @@ reverseArrayInPlace(arrayValue);
 console.log(arrayValue);
 → [5, 4, 3, 2, 1]
 */
+
+function reverseArray(array) {
+  let newArray = [];
+  for (let number of array) {
+    newArray.unshift(number);
+  }
+  return newArray;
+}
+
+function reverseArrayInPlace(array) {
+  let temp = 0;
+  for (let i = 0; i < array.length; i++) {}
+}
+
+console.log(reverseArray([1, 2, 3]));
+let arrayValue = [1, 2, 3, 4, 5];
+reverseArrayInPlace(arrayValue);
+console.log(arrayValue);
