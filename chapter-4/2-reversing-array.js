@@ -30,8 +30,18 @@ function reverseArray(array) {
 }
 
 function reverseArrayInPlace(array) {
+  // Modifies array in place
+  // Loops over first half of array and swaps first and last numbers
+  // cycles through rest of array swapping
+
   let temp = 0;
-  for (let i = 0; i < array.length; i++) {}
+  let halfLength = Math.floor(array.length / 2);
+  for (let i = 0; i < halfLength; i++) {
+    temp = array[array.length - 1 - i];
+    array[array.length - 1 - i] = array[i];
+    array[i] = temp;
+  }
+  return array;
 }
 
 console.log(reverseArray([1, 2, 3]));
