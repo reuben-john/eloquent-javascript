@@ -11,7 +11,14 @@
 // When defining the function, you can use a regular loop to do the actual looping.
 
 // Your code here.
-// loop(3, n => n > 0, n => n - 1, console.log);
 // → 3
 // → 2
 // → 1
+
+function loop(start, test, update, body) {
+  for (let value = start; test(value); value = update(value)) {
+    body(value);
+  }
+}
+
+loop(3, n => n > 0, n => n - 1, console.log);
