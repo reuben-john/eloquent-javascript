@@ -26,3 +26,43 @@ console.log(deepEqual(obj, {here: 1, object: 2}));
 console.log(deepEqual(obj, {here: {is: "an"}, object: 2}));
 → true
 */
+
+function deepEqual(a, b) {
+  // start simplest a === b without conversion
+
+  if (a === b) {
+    return true;
+  }
+
+  // Make sure items are not null and/or objects
+
+  if (a == null || b == null || typeof a != "object" || typeof b != "object") {
+    return false;
+  }
+
+  let keysOfA = Object.keys(a);
+  let keysOfB = Object.keys(b);
+
+  // It not equal, object cannot be the same
+  if (keysOfA.length != keysOfB.length) {
+    return false;
+  }
+
+  // loop through each key and compare
+  // check if keys match and values match
+  for (let key of keysOfA) {
+    if (!keysOfB.includes(key) || !deepEqual(a[key], b[key])) {
+      return false;
+    }
+  }
+
+  return true;
+}
+
+console.log(deepEqual(1, 2));
+console.log(deepEqual(1, 1));
+
+let obj = { here: { is: "an" }, object: 2 };
+console.log(deepEqual(obj, obj));
+console.log(deepEqual(obj, { here: 1, object: 2 }));
+console.log(deepEqual(obj, { here: { is: "an" }, object: 2 }));
