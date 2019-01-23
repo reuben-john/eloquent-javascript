@@ -42,3 +42,24 @@ class RabbitES6 {
 }
 
 let blackRabbit = new RabbitES6("black");
+
+// class expression
+
+let object = new class {
+  getWord() {
+    return "hello";
+  }
+}();
+
+// console.log(object.getWord());
+
+// Maps
+
+let ages = new Map();
+ages.set("Boris", 39);
+ages.set("Liang", 29);
+ages.set("Julia", 69);
+
+// console.log(`Julia is ${ages.get("Julia")}`);
+// console.log("Is Jack's age known?", ages.has("Jack"));
+// console.log(ages.has("toString"));
