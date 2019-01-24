@@ -43,15 +43,26 @@ class Group {
     }
     return group;
   }
+
+  [Symbol.iterator]() {
+    return new GroupIterator(this);
+  }
 }
 
 class GroupIterator {
-  constructor() {
-    this.index = 0;
+  constructor(collection) {
+    this.position = 0;
+    this.collection = collection;
   }
 
   next() {
-    return value;
+    if (this.position >= this.collection.group.length) {
+      return { done: true };
+    } else {
+      let result = { value: this.collection.group[this.position], done: false };
+      this.position++;
+      return result;
+    }
   }
 }
 
