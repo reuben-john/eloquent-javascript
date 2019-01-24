@@ -12,11 +12,49 @@
 // It is okay if your iterator behaves strangely when the group is
 // modified during iteration.
 
-// // Your code here (and the code from the previous exercise)
-
 // for (let value of Group.from(["a", "b", "c"])) {
 //   console.log(value);
 // }
-// // → a
-// // → b
-// // → c
+
+class Group {
+  constructor() {
+    this.group = [];
+  }
+
+  add(value) {
+    if (!this.group.includes(value)) {
+      this.group.push(value);
+    }
+  }
+  delete(value) {
+    let index = this.group.indexOf(value);
+    if (index > -1) {
+      this.group.slice(index, 1);
+    }
+  }
+  has(value) {
+    return this.group.includes(value);
+  }
+
+  static from(iterable) {
+    let group = new Group();
+    for (let item of iterable) {
+      group.add(item);
+    }
+    return group;
+  }
+}
+
+class GroupIterator {
+  constructor() {
+    this.index = 0;
+  }
+
+  next() {
+    return value;
+  }
+}
+
+for (let value of Group.from(["a", "b", "c"])) {
+  console.log(value);
+}
