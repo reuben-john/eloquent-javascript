@@ -18,3 +18,24 @@
 // → Vec{x: -1, y: -1}
 // console.log(new Vec(3, 4).length);
 // → 5
+
+class Vec {
+  constructor(x, y) {
+    this.x = x;
+    this.y = y;
+  }
+
+  plus(vector) {
+    // return new vector plus current vector
+    return "bah";
+  }
+  minus(vector) {
+    // return new vector minus current vector
+
+    return "meh";
+  }
+  get length() {
+    // distance between x,y and 0,0
+    return "length";
+  }
+}
