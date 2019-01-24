@@ -27,15 +27,21 @@ class Vec {
 
   plus(vector) {
     // return new vector plus current vector
-    return "bah";
+    // vector.x + this.x, vector.y + this.y
+    return new Vec(this.x + vector.x, this.y + vector.y);
   }
   minus(vector) {
     // return new vector minus current vector
 
-    return "meh";
+    return new Vec(this.x - vector.x, this.y - vector.y);
   }
   get length() {
     // distance between x,y and 0,0
-    return "length";
+    // Pythagorean theorem sqrt(x*x + y*y)
+    return Math.sqrt(this.x * this.x + this.y * this.y);
   }
 }
+
+console.log(new Vec(1, 2).plus(new Vec(2, 3)));
+console.log(new Vec(1, 2).minus(new Vec(2, 3)));
+console.log(new Vec(3, 4).length);
