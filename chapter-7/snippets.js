@@ -101,6 +101,7 @@ VillageState.random = function(parcelCount = 5) {
     do {
       place = randomPick(Object.keys(roadGraph));
     } while (place == address);
+    parcels.push({ place, address });
   }
   return new VillageState("Post Office", parcels);
 };
