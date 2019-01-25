@@ -83,3 +83,24 @@ function runRobot(state, robot, memory) {
     console.log(`Moved to ${action.direction}`);
   }
 }
+
+function randomPick(array) {
+  let choice = Math.floor(Math.random() * array.length);
+  return array[choice];
+}
+
+function randomRobot(state) {
+  return { direction: randomPick(roadGraph[state.place]) };
+}
+
+VillageState.random = function(parcelCount = 5) {
+  let pracels = [];
+  for (let i = 0; i < parcelCount; i++) {
+    let address = randomPick(Object.keys(roadGraph));
+    let place;
+    do {
+      place = randomPick(Object.keys(roadGraph));
+    } while (place == address);
+  }
+  return new VillageState("Post OFfice", parcels);
+};
