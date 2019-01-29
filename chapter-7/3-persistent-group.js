@@ -24,14 +24,32 @@
 // Why do you need only one PGroup.empty value, rather than having a
 // function that creates a new, empty map every time?
 
-// class PGroup {
-// Your code here
-// }
+class PGroup {
+  constructor(members) {
+    this.members = members;
+  }
 
-// let a = PGroup.empty.add("a");
-// let ab = a.add("b");
-// let b = ab.delete("a");
+  add(value) {
+    if (this.has(value)) return this;
+    return new PGroup(this.members.concat([value]));
+  }
 
-// console.log(b.has("b"));
-// console.log(a.has("b"));
-// console.log(b.has("a"));
+  delete(value) {
+    if (!this.has(value)) return this;
+    return new PGroup(this.members.filter(v => v !== value));
+  }
+
+  has(value) {
+    return this.members.includes(value);
+  }
+}
+
+PGroup.empty = new PGroup([]);
+
+let a = PGroup.empty.add("a");
+let ab = a.add("b");
+let b = ab.delete("a");
+
+console.log(b.has("b"));
+console.log(a.has("b"));
+console.log(b.has("a"));
