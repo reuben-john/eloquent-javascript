@@ -154,4 +154,17 @@ function goalOrientedRobot({ place, parcels }, route) {
   return { direction: route[0], memory: route.slice(1) };
 }
 
-runRobot(VillageState.random(), goalOrientedRobot, []);
+// runRobot(VillageState.random(), goalOrientedRobot, []);
+
+function compareRobots(robot1, memory1, robot2, memory2) {
+  let total1 = 0;
+  let total2 = 0;
+  for (let i = 0; i < 100; i++) {
+    let state = VillageState.random();
+    total1 += 1;
+    total2 += 2;
+  }
+  console.log(total1, total2);
+}
+
+compareRobots(routeRobot, [], goalOrientedRobot, []);
