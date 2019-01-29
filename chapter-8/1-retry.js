@@ -21,11 +21,9 @@ function primitiveMultiply(a, b) {
 function reliableMultiply(a, b) {
   for (;;) {
     try {
-      if (Math.random() < 0.2) return a * b;
+      return primitiveMultiply(a, b);
     } catch (error) {
-      if (error instanceof MultiplicatorUnitFailure) {
-        console.log(error);
-      } else {
+      if (!(error instanceof MultiplicatorUnitFailure)) {
         throw error;
       }
     }
