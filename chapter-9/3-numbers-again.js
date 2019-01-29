@@ -8,7 +8,7 @@
 // That is, .5 and 5. are valid JavaScript numbers, but a lone dot isn’t.
 
 // Fill in this regular expression.
-let number = /^...$/;
+let number = /^[+\-]?(\d+(\.\d*)?|\.\d+)([eE][+\-]?\d+)?$/;
 
 // Tests:
 for (let str of [
