@@ -54,3 +54,66 @@ let escaped = name.replace(/[\\[.+*?(){|^$]/g, "\\$&");
 let regexp = new RegExp("\\b" + escaped + "\\b", "gi");
 console.log(text.replace(regexp, "_$&_"));
 // → This _dea+hl[]rd_ guy is super annoying.
+
+let input = "A string with 3 numbers in it... 42 and 88.";
+let number = /\b\d+\b/g;
+let match;
+while ((match = number.exec(input))) {
+  console.log("Found", match[0], "at", match.index);
+}
+// → Found 3 at 14
+//   Found 42 at 33
+//   Found 88 at 40
+
+// Parsing INI files
+/*
+searchengine=https://duckduckgo.com/?q=$1
+spitefulness=9.7
+
+; comments are preceded by a semicolon...
+; each section concerns an individual enemy
+[larry]
+fullname=Larry Doe
+type=kindergarten bully
+website=http://www.geocities.com/CapeCanaveral/11451
+
+[davaeorn]
+fullname=Davaeorn
+type=evil wizard
+outputdir=/home/marijn/enemies/davaeorn
+*/
+
+function parseINI(string) {
+  // Start with an object to hold the top-level fields
+  let result = {};
+  let section = result;
+  string.split(/\r?\n/).forEach(line => {
+    let match;
+    if ((match = line.match(/^(\w+)=(.*)$/))) {
+      section[match[1]] = match[2];
+    } else if ((match = line.match(/^\[(.*)\]$/))) {
+      section = result[match[1]] = {};
+    } else if (!/^\s*(;.*)?$/.test(line)) {
+      throw new Error("Line '" + line + "' is not valid.");
+    }
+  });
+  return result;
+}
+
+console.log(
+  parseINI(`
+searchengine=https://duckduckgo.com/?q=$1
+spitefulness=9.7
+
+; comments are preceded by a semicolon...
+; each section concerns an individual enemy
+[larry]
+fullname=Larry Doe
+type=kindergarten bully
+website=http://www.geocities.com/CapeCanaveral/11451
+
+[davaeorn]
+fullname=Davaeorn
+type=evil wizard
+outputdir=/home/marijn/enemies/davaeorn`)
+);
