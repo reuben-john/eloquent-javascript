@@ -42,7 +42,15 @@ const box = {
 };
 
 function withBoxUnlocked(body) {
-  // Your code here.
+  if (!box.locked) {
+    return body();
+  }
+  box.unlock();
+  try {
+    return body();
+  } finally {
+    box.lock();
+  }
 }
 
 withBoxUnlocked(function() {
