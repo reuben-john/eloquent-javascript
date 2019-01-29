@@ -13,15 +13,28 @@
 // For the sake of fairness, make sure you give each task to
 // both robots, rather than generating different tasks per robot.
 
+function countTurns(state, robot, memory) {
+  // count steps for each robot
+  for (let turn = 0; ; turn++) {
+    if (state.parcels.length == 0) {
+      return turn;
+    }
+    let action = robot(state, memory);
+    state = state.move(action.direction);
+    memory = action.memory;
+  }
+}
+//
+
 function compareRobots(robot1, memory1, robot2, memory2) {
   let total1 = 0;
   let total2 = 0;
   for (let i = 0; i < 100; i++) {
     let state = VillageState.random();
-    total1 += 1;
-    total2 += 2;
+    total1 += countTurns(state, robot1, memory1);
+    total2 += countTurns(state, robot2, memory2);
   }
-  console.log(total1, total2);
+  console.log("Robot 1:", total1, "Robot 2:", total2);
 }
 
-compareRobots(RouteRobot, [], GoalOrientedRobot, []);
+compareRobots(routeRobot, [], goalOrientedRobot, []);
