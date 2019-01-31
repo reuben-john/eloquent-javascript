@@ -65,7 +65,7 @@ function request(nest, target, type, content) {
       nest.send(target, type, content, (failed, value) => {
         done = true;
         if (failed) reject(failed);
-        else resolve(Value);
+        else resolve(value);
       });
       setTimeout(() => {
         if (done) return;
@@ -89,3 +89,62 @@ function requestType(name, handler) {
     }
   });
 }
+
+requestType("ping", () => "pong");
+
+// promise.all waits for all other promises to resolve
+
+function availableNeighbors(nest) {
+  let requests = nest.neighbors.map(neighbor => {
+    return request(nest, neighbor, "ping").then(() => true, () => false);
+  });
+  return Promise.all(requests).then(result => {
+    return nest.neighbors.filter((_, i) => result[i]);
+  });
+}
+
+// import { everywhere } from "./crow-tech";
+let everywhere = require("./crow-tech.js").everywhere;
+
+everywhere(nest => {
+  nest.state.gossip = [];
+});
+
+function sendGossip(nest, message, exceptFor = null) {
+  nest.state.gossip.push(message);
+  for (let neighbor of nest.neighbors) {
+    if (neighbor == exceptFor) continue;
+    request(nest, neighbor, "gossip", message);
+  }
+}
+requestType("gossip", (nest, message, source) => {
+  if (nest.state.gossip.includes(message)) return;
+  console.log(`${nest.name} received gossip '${message}' from ${source}`);
+  sendGossip(nest, message, source);
+});
+
+// sendGossip(bigOak, "Kids with airgun in the park");
+
+requestType("connections", (nest, { name, neighbors }, source) => {
+  let connections = nest.state.connections;
+  if (JSON.stringify(connections.get(name)) == JSON.stringify(neighbors))
+    return;
+  connections.set(name, neighbors);
+  broadcastConnections(nest, name, source);
+});
+
+function broadcastConnections(nest, name, exceptFor = null) {
+  for (let neighbor of nest.neighbors) {
+    if (neighbor == exceptFor) continue;
+    request(nest, neighbor, "connections", {
+      name,
+      neighbors: nest.state.connections.get(name)
+    });
+  }
+}
+
+everywhere(nest => {
+  nest.state.connections = new Map();
+  nest.state.connections.set(nest.name, nest.neighbors);
+  broadcastConnections(nest, nest.name);
+});
