@@ -74,3 +74,9 @@ const MOUNTAINS = [
     place: "Italy/France"
   }
 ];
+
+function buildTable(table) {
+  // construct table structure
+  // add headers
+  // loop through object and add each place to table
+}
