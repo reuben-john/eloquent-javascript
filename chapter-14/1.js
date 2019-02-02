@@ -34,9 +34,6 @@
 // Once you have this working, right - align cells that contain number values
 // by setting their style.textAlign property to "right".
 
-/* <h1>Mountains</h1> */
-/* <div id="mountains"></div> */
-
 const MOUNTAINS = [
   {
     name: "Kilimanjaro",
@@ -75,8 +72,34 @@ const MOUNTAINS = [
   }
 ];
 
-function buildTable(table) {
+function buildTable(mountains) {
   // construct table structure
   // add headers
   // loop through object and add each place to table
+
+  let table = document.createElement("table");
+  let headers = Object.keys(mountains[0]);
+  console.log(headers);
+  let tr = document.createElement("tr");
+  for (let i = 0; i < headers.length; i++) {
+    let th = document.createElement("th");
+    th.appendChild(document.createTextNode(headers[i]));
+    tr.appendChild(th);
+  }
+  table.appendChild(tr);
+
+  for (let i = 0; i < mountains.length; i++) {
+    let location = mountains[i];
+    let rowData = Object.values(location);
+    let row = document.createElement("tr");
+    for (let entry of rowData) {
+      let td = document.createElement("td");
+      td.appendChild(document.createTextNode(entry));
+      row.appendChild(td);
+    }
+    table.appendChild(row);
+  }
+  return table;
 }
+
+document.getElementById("mountains").appendChild(buildTable(MOUNTAINS));
